@@ -51,10 +51,12 @@ class App extends React.Component {
                <BrowserRouter>
                    <Navigation />
                    <div>
-                       <Route path="/" exact component={TaskBoard} />
+                       <Route path="/" exact render={ () =>
+                           <TaskBoard tasks={this.state.tasks} onUpdateTaskList={this.onUpdateTaskList} /> }
+                       />
                        <Route path="/ListView" render={ () =>
-                           <ListView tasks={this.state.tasks} onUpdateTaskList={this.onUpdateTaskList} />
-                       } />
+                           <ListView tasks={this.state.tasks} onUpdateTaskList={this.onUpdateTaskList} /> }
+                       />
                        <Route path="/AddTask" component={AddTask} />
                    </div>
                </BrowserRouter>

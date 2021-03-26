@@ -34,7 +34,7 @@ class ListView extends React.Component {
 
         return (
             <ul className="task-list list-group">
-                <div>
+                <div className="bg-light">
                     <h3>Todo</h3>
                     { todoItems }
                 </div>
