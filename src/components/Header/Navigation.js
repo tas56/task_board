@@ -22,8 +22,8 @@ class Navigation extends React.Component {
                     </Link>
                 </li>
                 <li className='nav-item'>
-                    <Link className={this.isActiveTab('/TaskList')} to="/TaskList"
-                          onClick={event => this.onTabClick(event, '/TaskList')}>
+                    <Link className={this.isActiveTab('/ListView')} to="/ListView"
+                          onClick={event => this.onTabClick(event, '/ListView')}>
                         List View
                     </Link>
                 </li>
