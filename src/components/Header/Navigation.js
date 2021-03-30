@@ -1,40 +1,41 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-class Navigation extends React.Component {
-    state = { currentPage: '/' }
+const Navigation = () => {
 
-    isActiveTab(tabName) {
-        return (tabName === this.state.currentPage) ? 'nav-link active' : 'nav-link';
+    const [currentPage,setCurrentPage] = useState('/');
+
+    const isActiveTab = (tabName) => {
+        return (tabName === setCurrentPage) ? 'nav-link active' : 'nav-link';
     }
 
-    onTabClick(event, tabName) {
-        this.setState({ currentPage: tabName })
+    const onTabClick = (event, tabName) => {
+        setCurrentPage({ currentPage: tabName })
     }
 
-    render () {
-        return (
-            <ul className='nav page-tabs'>
-                <li className='nav-item'>
-                    <Link className={this.isActiveTab('/')} to="/"
-                          onClick={event => this.onTabClick(event, '/')}>
-                        Grid View
-                    </Link>
-                </li>
-                <li className='nav-item'>
-                    <Link className={this.isActiveTab('/ListView')} to="/ListView"
-                          onClick={event => this.onTabClick(event, '/ListView')}>
-                        List View
-                    </Link>
-                </li>
-                <li className='nav-item'>
-                    <Link className={this.isActiveTab('/AddTask')} to="/AddTask"
-                          onClick={event => this.onTabClick(event, '/AddTask')}>
-                        Add Task
-                    </Link>
-                </li>
-            </ul>
-        )
-    }
+
+    return (
+        <ul className='nav page-tabs'>
+            <li className='nav-item'>
+                <Link className={isActiveTab('/')} to="/"
+                      onClick={event => onTabClick(event, '/')}>
+                    Grid View
+                </Link>
+            </li>
+            <li className='nav-item'>
+                <Link className={isActiveTab('/ListView')} to="/ListView"
+                      onClick={event => onTabClick(event, '/ListView')}>
+                    List View
+                </Link>
+            </li>
+            <li className='nav-item'>
+                <Link className={isActiveTab('/AddTask')} to="/AddTask"
+                      onClick={event => onTabClick(event, '/AddTask')}>
+                    Add Task
+                </Link>
+            </li>
+        </ul>
+    )
+
 }
 export default Navigation;

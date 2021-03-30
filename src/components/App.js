@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import axios from "axios";
 
 import Navigation from "./Header/Navigation";
@@ -8,61 +9,58 @@ import AddTask from "./TaskBoard/AddTask";
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
-class App extends React.Component {
+const App = () => {
 
-    state = {
-        tasks: [],
-        errorMessage: ''
-    }
+    const [tasks,setTasks] = useState([]);
+    const [errorMessage,setErrorMessage] = useState('')
 
-    componentDidMount() {
+
+    function componentDidMount() {
         this.getData();
     }
 
-    getData() {
+    function getData() {
         axios.get('http://my-json-server.typicode.com/bnissen24/project2DB/posts')
             .then(response => {
-                this.setState({ tasks: response.data });
+                setTasks({ tasks: response.data });
             }).catch(error => {
-            this.setState({ errorMessage: error.message });
+                setErrorMessage({ errorMessage: error.message });
         });
     }
 
-    onAddTask = (taskName) => {
-        let tasks = this.state.tasks;
-        tasks.push({
-            title: taskName,
-            id: this.state.tasks.length + 1,
-            type: 'task',
-            column: 'todo'
-        });
+    const onAddTask = (taskName) => {
+        setTasks(
+            tasks.push({
+                title: taskName,
+                id: tasks.length + 1,
+                type: 'task',
+                column: 'todo'
+            }))
 
         this.setState({ tasks });
     }
 
-    onUpdateTaskList = (newTaskList) => {
+    const onUpdateTaskList = (newTaskList) => {
         this.setState({ tasks: newTaskList });
     }
 
+    return (
+        <div>
+            <BrowserRouter>
+                <Navigation />
+                <div>
+                    <Route path="/" exact render={ () =>
+                        <TaskBoard tasks={tasks} onUpdateTaskList={onUpdateTaskList} /> }
+                        />
+                    <Route path="/ListView" render={ () =>
+                        <ListView tasks={tasks} onUpdateTaskList={onUpdateTaskList} /> }
+                       />
+                    <Route path="/AddTask" component={AddTask} />
+                </div>
+            </BrowserRouter>
+        </div>
+    )
 
-   render() {
-       return (
-           <div>
-               <BrowserRouter>
-                   <Navigation />
-                   <div>
-                       <Route path="/" exact render={ () =>
-                           <TaskBoard tasks={this.state.tasks} onUpdateTaskList={this.onUpdateTaskList} /> }
-                       />
-                       <Route path="/ListView" render={ () =>
-                           <ListView tasks={this.state.tasks} onUpdateTaskList={this.onUpdateTaskList} /> }
-                       />
-                       <Route path="/AddTask" component={AddTask} />
-                   </div>
-               </BrowserRouter>
-           </div>
-       )
-   }
 }
 
 export default App;
