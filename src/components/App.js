@@ -1,6 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
-import axios from "axios";
+import { useState, useEffect } from 'react';
+//import axios from "axios";
 
 import Navigation from "./Header/Navigation";
 import TaskBoard from "./TaskBoard/TaskBoard";
@@ -12,50 +11,51 @@ import { BrowserRouter, Route } from 'react-router-dom';
 const App = () => {
 
     const [tasks,setTasks] = useState([]);
-    const [errorMessage,setErrorMessage] = useState('')
+    //const [errorMessage,setErrorMessage] = useState('')
 
+    useEffect(() => {
+        const getTasks = async () => {
+            const tasksFromServer = await fetchTasks()
+            setTasks(tasksFromServer)
+        }
+        getTasks();
+    }, []);
 
-    function componentDidMount() {
-        this.getData();
+    const fetchTasks = async () => {
+        const res = await fetch('http://localhost:5000/tasks');
+        const data = await res.json()
+        return data;
     }
 
-    function getData() {
-        axios.get('http://my-json-server.typicode.com/bnissen24/project2DB/posts')
-            .then(response => {
-                setTasks({ tasks: response.data });
-            }).catch(error => {
-                setErrorMessage({ errorMessage: error.message });
-        });
+    // Add Task
+    const addTask = (task) => {
+        const id = Math.floor(Math.random() * 1000) +1;
+        const newTask = {id, ...task}
+        setTasks([...tasks, newTask])
     }
-
-    const onAddTask = (taskName) => {
-        setTasks(
-            tasks.push({
-                title: taskName,
-                id: tasks.length + 1,
-                type: 'task',
-                column: 'todo'
-            }))
-
-        this.setState({ tasks });
+    // Delete Task
+    const deleteTask = (id) => {
+        setTasks(tasks.filter((task) =>
+            task.id !== id))
     }
 
     const onUpdateTaskList = (newTaskList) => {
-        this.setState({ tasks: newTaskList });
+        setTasks({  newTaskList });
     }
 
     return (
-        <div>
+        <div className={"container"}>
             <BrowserRouter>
                 <Navigation />
                 <div>
                     <Route path="/" exact render={ () =>
-                        <TaskBoard tasks={tasks} onUpdateTaskList={onUpdateTaskList} /> }
+                        <TaskBoard tasks={tasks} onDelete={deleteTask} setTasks={setTasks} /> }
                         />
                     <Route path="/ListView" render={ () =>
                         <ListView tasks={tasks} onUpdateTaskList={onUpdateTaskList} /> }
                        />
-                    <Route path="/AddTask" component={AddTask} />
+                    <Route path="/AddTask" render={ () =>
+                        <AddTask onAdd={addTask} /> } />
                 </div>
             </BrowserRouter>
         </div>

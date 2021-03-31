@@ -1,54 +1,65 @@
-import React from 'react';
-
 import TaskItem from './TaskItem';
+
+const COLUMN_NAMES = ['todo', 'in-progress', 'review', 'done'];
 
 const TaskBoard = (props) => {
 
-    const currentColumn = () => {
-        let currentColumn = props.tasks.column;
-        let index = 1;
-        switch (currentColumn){
-            case 'todo':
-                index = 1;
-                break;
-            case 'inprogress':
-                index = 2;
-                break;
-            case 'review':
-                index = 3;
-                break;
-            case 'done':
-                index = 4;
-                break;
-        } return index;
+    const prevClick = (id) => {
+        let taskColumn = props.tasks.find((task) => task.id === id);
+        let columnIndex = COLUMN_NAMES.findIndex(name => taskColumn.column === name);
+
+            columnIndex--;
+            taskColumn.column = COLUMN_NAMES[columnIndex];
+            props.setTasks(taskColumn);
+
     }
 
-    const markDone = (task) => {
-        const taskIndex = props.tasks.findIndex(t => t.id === task.id);
-        let taskList = props.tasks;
-        taskList.splice(taskIndex, 1);
-        props.onUpdateTaskList(taskList);
-    }
+    const nextClick = (id) => {
+        let task = props.tasks.find((task) => task.id === id);
+        let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
 
+            columnIndex++;
+            task.column = COLUMN_NAMES[columnIndex];
+            props.setTasks(task);
+    }
 
     const todoItems = props.tasks.filter(task => task.column === 'todo')
         .map(task => {
-            return <TaskItem task={task} key={task.id} type={task.type} markDone={markDone} />
+            return <TaskItem task={task}
+                             key={task.id}
+                             type={task.type}
+                             prevClick={prevClick}
+                             next={"Start Work >"}
+                             nextClick={nextClick}
+                             onDelete={props.onDelete} />
         });
 
     const inprogressItems = props.tasks.filter(task => task.column === 'in-progress')
         .map(task => {
-            return <TaskItem task={task} key={task.id} type={task.type} markDone={markDone} />
+            return <TaskItem task={task}
+                             prev={"< Send Back"}
+                             prevClick={prevClick}
+                             next={"Request Review >"}
+                             nextClick={nextClick}
+                             onDelete={props.onDelete} />
         });
 
     const reviewItems = props.tasks.filter(task => task.column === 'review')
         .map(task => {
-            return <TaskItem task={task} key={task.id} type={task.type} markDone={markDone} />
+            return <TaskItem task={task}
+                             prev={"< More Work Required"}
+                             prevClick={prevClick}
+                             next={"Mark Done >"}
+                             nextClick={nextClick}
+                             onDelete={props.onDelete} />
         });
 
     const doneItems = props.tasks.filter(task => task.column === 'done')
         .map(task => {
-            return <TaskItem task={task} key={task.id} type={task.type} markDone={markDone} />
+            return <TaskItem task={task}
+                             prev={"< Request Re-Review"}
+                             prevClick={prevClick}
+                             onDelete={props.onDelete} />
         });
 
     return (
