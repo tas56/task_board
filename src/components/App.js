@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-//import axios from "axios";
+import { BrowserRouter, Route } from 'react-router-dom';
+import { FaPlus, FaMinus } from "react-icons/fa";
 
-import Navigation from "./Header/Navigation";
+import Header from './Header/Header'
 import TaskBoard from "./TaskBoard/TaskBoard";
 import ListView from "./TaskBoard/ListView";
 import AddTask from "./TaskBoard/AddTask";
 
-import { BrowserRouter, Route } from 'react-router-dom';
-
 const App = () => {
 
     const [tasks,setTasks] = useState([]);
-    //const [errorMessage,setErrorMessage] = useState('')
+    const [expand, setExpand] = useState(false);
 
     useEffect(() => {
         const getTasks = async () => {
@@ -28,34 +27,56 @@ const App = () => {
     }
 
     // Add Task
-    const addTask = (task) => {
-        const id = Math.floor(Math.random() * 1000) +1;
-        const newTask = {id, ...task}
-        setTasks([...tasks, newTask])
+    const addTask = async (task) => {
+        const res = await fetch('http://localhost:5000/tasks/', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(task)
+        })
+        const data = await res.json()
+        data.column = 'todo';
+
+        setTasks([...tasks,data])
+        alert('Task added');
     }
     // Delete Task
-    const deleteTask = (id) => {
+    const deleteTask = async (id) => {
+        await fetch(`http://localhost:5000/tasks/${id}`,
+            {method: 'DELETE'});
         setTasks(tasks.filter((task) =>
             task.id !== id))
     }
 
-    const onUpdateTaskList = (newTaskList) => {
-        setTasks({  newTaskList });
-    }
-
     return (
-        <div className={"container"}>
+        <div>
             <BrowserRouter>
-                <Navigation />
-                <div>
+                <Header />
+                <div className="container">
+                    <div className="w-100 border-bottom mb-3">
+                        <p onClick={() => setExpand(!expand)}
+                           style={{cursor:'pointer'}}> Add Task
+                        {expand ? <FaMinus data-toggle="tooltip"
+                                               data-placement="bottom"
+                                               title="collapse"
+                                                className="ml-2" />
+                            : <FaPlus data-toggle="tooltip"
+                                             data-placement="bottom"
+                                             title="add task"
+                                             className="ml-2" /> }
+                        </p>
+                        {expand && <AddTask onAdd={addTask} /> }
+                    </div>
                     <Route path="/" exact render={ () =>
-                        <TaskBoard tasks={tasks} onDelete={deleteTask} setTasks={setTasks} /> }
+                        <TaskBoard tasks={tasks}
+                                   onDelete={deleteTask}
+                                   setTasks={setTasks} /> }
                         />
                     <Route path="/ListView" render={ () =>
-                        <ListView tasks={tasks} onUpdateTaskList={onUpdateTaskList} /> }
+                        <ListView tasks={tasks}
+                                  setTasks={setTasks} /> }
                        />
-                    <Route path="/AddTask" render={ () =>
-                        <AddTask onAdd={addTask} /> } />
                 </div>
             </BrowserRouter>
         </div>

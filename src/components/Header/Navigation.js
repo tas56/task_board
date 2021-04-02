@@ -29,12 +29,6 @@ const Navigation = () => {
                     List View
                 </Link>
             </li>
-            <li className='nav-item'>
-                <Link className={isActiveTab('/AddTask')} to="/AddTask"
-                      onClick={event => onTabClick(event, '/AddTask')}>
-                    Add Task
-                </Link>
-            </li>
         </ul>
     )
 

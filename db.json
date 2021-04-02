@@ -57,18 +57,16 @@
       "column": "todo"
     },
     {
-      "id": 9,
-      "title": "Create Add Form",
-      "type": "feature",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "todo"
+      "title": "Finish react app",
+      "description": "IS322",
+      "type": "task",
+      "id": 9
     },
     {
-      "id": 10,
-      "title": "App Crashs! :(",
-      "type": "bug",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done"
+      "title": "Finish react app",
+      "description": "IS322",
+      "type": "task",
+      "id": 10
     }
   ]
 }

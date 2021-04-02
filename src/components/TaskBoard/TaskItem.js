@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {FaTimes, FaChevronDown, FaChevronUp} from 'react-icons/fa';
+import {FaTrash, FaChevronDown, FaChevronUp} from 'react-icons/fa';
 import Button from "./Button";
 
 const TaskItem = props => {
@@ -11,12 +11,21 @@ const TaskItem = props => {
             <div className="card-body">
                 <div className="float-right" >
                 {expand ? <FaChevronUp style={{cursor:'pointer'}}
+                                       data-toggle="tooltip"
+                                       data-placement="bottom"
+                                       title="collapse"
                                        onClick={() => setExpand(!expand)} />
                 : <FaChevronDown style={{cursor:'pointer'}}
+                                 data-toggle="tooltip"
+                                 data-placement="bottom"
+                                 title="expand"
                                  onClick={() => setExpand(!expand)} /> }
-                <FaTimes
+                <FaTrash
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Delete task"
                     className="ml-2"
-                    style={{color:'red', cursor:'pointer'}}
+                    style={{color:'red', opacity: .5, cursor:'pointer'}}
                     onClick={() => props.onDelete(props.task.id)}
                 />
                 </div>
@@ -30,9 +39,18 @@ const TaskItem = props => {
                     <p>{props.task.description}</p>
                     </div>
                 }
-
-                <Button onClick={props.prevClick} task={props.task} text={props.prev} />
-                <Button onClick={props.nextClick} task={props.task} text={props.next} />
+                <div className="row d-flex justify-content-between">
+                    <Button onClick={props.prevClick}
+                            className={'pull-left btn'}
+                            style={{fontSize: '12px', color: 'blue'}}
+                            task={props.task}
+                            text={props.prev} />
+                    <Button onClick={props.nextClick}
+                            className={'pull-right btn'}
+                            style={{fontSize: '12px', color: 'blue'}}
+                            task={props.task}
+                            text={props.next} />
+                </div>
             </div>
         </div>
     )

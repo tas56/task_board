@@ -3,8 +3,8 @@ const Button = (props) => {
     return (
         <div>
             <button onClick={()=>props.onClick(props.task.id)}
-                    style={{color: "blue"}}
-                    className={'btn'}
+                    style={props.style}
+                    className={props.className}
             >{props.text}</button>
         </div>
     );
