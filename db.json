@@ -1,56 +1,59 @@
 {
   "tasks": [
     {
+      "id": 1,
       "title": "Install React",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done",
-      "id": 1
+      "column": "done"
     },
     {
+      "id": 2,
       "title": "Setup GitHub",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "in-progress",
-      "id": 2
+      "column": "review"
     },
     {
+      "id": 3,
       "title": "Invite Collaborators",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done",
-      "id": 3
+      "column": "done"
     },
     {
       "title": "Install Dependencies",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "in-progress",
+      "column": "review",
       "id": 4
     },
     {
+      "id": 5,
       "title": "Create App Component",
       "type": "feature",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "in-progress",
-      "id": 5
+      "column": "review"
     },
     {
+      "id": 6,
       "title": "Plan Component Diagram",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done",
-      "id": 6
+      "column": "review"
     },
     {
       "title": "Create Grid View",
       "type": "feature",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "review",
+      "column": "todo",
       "id": 7
     },
     {
-      "column": "todo",
+      "title": "Create List View",
+      "type": "feature",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
+      "column": "done",
       "id": 8
     },
     {
