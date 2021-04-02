@@ -29,9 +29,6 @@ const TaskBoard = (props) => {
 
     const updateColumn = (task,id) => {
         axios.put(`http://localhost:5000/tasks/${id}`, {
-            title: task.title,
-            type: task.type,
-            description: task.description,
             column: task.column
         }).then(resp => {
             props.setTasks([...props.tasks]);

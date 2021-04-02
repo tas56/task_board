@@ -50,9 +50,6 @@
       "id": 7
     },
     {
-      "title": "Create List View",
-      "type": "feature",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
       "column": "todo",
       "id": 8
     },
