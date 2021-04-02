@@ -26,7 +26,12 @@ const TaskItem = props => {
                     title="Delete task"
                     className="ml-2"
                     style={{color:'red', opacity: .5, cursor:'pointer'}}
-                    onClick={() => props.onDelete(props.task.id)}
+                    onClick={() => {
+                        // eslint-disable-next-line no-restricted-globals
+                        let c = confirm('Would you like to permanently delete this task?');
+                        if( c === true )
+                        props.onDelete(props.task.id)
+                    }}
                 />
                 </div>
 

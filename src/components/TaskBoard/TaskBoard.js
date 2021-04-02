@@ -13,7 +13,7 @@ const TaskBoard = (props) => {
         columnIndex--;
         task.column = COLUMN_NAMES[columnIndex];
 
-        updateColumn(task,id)
+        props.onUpdate(task,id)
 
     }
 
@@ -24,21 +24,7 @@ const TaskBoard = (props) => {
         columnIndex++;
         task.column = COLUMN_NAMES[columnIndex];
 
-        updateColumn(task,id)
-    }
-
-    const updateColumn = (task,id) => {
-        axios.put(`http://localhost:5000/tasks/${id}`, {
-            title: task.title,
-            type: task.type,
-            description: task.description,
-            column: task.column
-        }).then(resp => {
-            props.setTasks([...props.tasks]);
-            console.log(resp.data);
-        }).catch(error => {
-            console.log(error);
-        });
+        props.onUpdate(task,id)
     }
 
     const renderTaskItem = (task, setPrevious, setNext) => {

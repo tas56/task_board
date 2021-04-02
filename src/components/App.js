@@ -49,6 +49,21 @@ const App = () => {
         });
         setTasks(tasks.filter((task) =>
             task.id !== id))
+        alert('Task deleted');
+    }
+    // Update Task
+    const updateTask = (task,id) => {
+        axios.put(`http://localhost:5000/tasks/${id}`, {
+            title: task.title,
+            type: task.type,
+            description: task.description,
+            column: task.column
+        }).then(resp => {
+            setTasks([...tasks]);
+            console.log(resp.data);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     return (
@@ -73,7 +88,7 @@ const App = () => {
                     <Route path="/" exact render={ () =>
                         <TaskBoard tasks={tasks}
                                    onDelete={deleteTask}
-                                   setTasks={setTasks} /> }
+                                   onUpdate={updateTask} /> }
                         />
                     <Route path="/ListView" render={ () =>
                         <ListView tasks={tasks}

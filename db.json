@@ -1,59 +1,52 @@
 {
   "tasks": [
     {
-      "id": 1,
       "title": "Install React",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done"
+      "column": "in-progress",
+      "id": 1
     },
     {
-      "id": 2,
       "title": "Setup GitHub",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "review"
-    },
-    {
-      "id": 3,
-      "title": "Invite Collaborators",
-      "type": "task",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done"
+      "column": "review",
+      "id": 2
     },
     {
       "title": "Install Dependencies",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "review",
+      "column": "in-progress",
       "id": 4
     },
     {
-      "id": 5,
       "title": "Create App Component",
       "type": "feature",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "review"
+      "column": "review",
+      "id": 5
     },
     {
-      "id": 6,
       "title": "Plan Component Diagram",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "review"
+      "column": "done",
+      "id": 6
     },
     {
       "title": "Create Grid View",
       "type": "feature",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "todo",
+      "column": "done",
       "id": 7
     },
     {
       "title": "Create List View",
       "type": "feature",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done",
+      "column": "todo",
       "id": 8
     },
     {
@@ -61,6 +54,13 @@
       "description": "test task",
       "type": "feature",
       "id": 9
+    },
+    {
+      "title": "Invite collaborators",
+      "type": "task",
+      "description": "to github",
+      "column": "todo",
+      "id": 10
     }
   ]
 }
