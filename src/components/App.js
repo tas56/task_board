@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { FaPlus, FaMinus } from "react-icons/fa";
+import axios from "axios";
 
 import Header from './Header/Header'
 import TaskBoard from "./TaskBoard/TaskBoard";
@@ -13,38 +14,39 @@ const App = () => {
     const [expand, setExpand] = useState(false);
 
     useEffect(() => {
-        const getTasks = async () => {
-            const tasksFromServer = await fetchTasks()
-            setTasks(tasksFromServer)
-        }
-        getTasks();
+        axios.get('http://localhost:5000/tasks')
+            .then(res => {
+                let data = res.data;
+                setTasks(data);
+            }).catch(error => {
+                console.log(error);
+        })
     }, []);
 
-    const fetchTasks = async () => {
-        const res = await fetch('http://localhost:5000/tasks');
-        const data = await res.json()
-        return data;
-    }
-
     // Add Task
-    const addTask = async (task) => {
-        const res = await fetch('http://localhost:5000/tasks/', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(task)
-        })
-        const data = await res.json()
-        data.column = 'todo';
+    const addTask = (task) => {
+        axios.post('http://localhost:5000/tasks', {
+            title: task.title,
+            description: task.description,
+            type: task.type
+        }).then(res => {
+            let data = res.data;
+            data.column = 'todo';
+            setTasks([...tasks,data])
 
-        setTasks([...tasks,data])
+        }).catch(error => {
+            console.log(error);
+        });
         alert('Task added');
     }
     // Delete Task
-    const deleteTask = async (id) => {
-        await fetch(`http://localhost:5000/tasks/${id}`,
-            {method: 'DELETE'});
+    const deleteTask = (id) => {
+        axios.delete(`http://localhost:5000/tasks/${id}`)
+            .then(resp => {
+                console.log(resp.data)
+            }).catch(error => {
+            console.log(error);
+        });
         setTasks(tasks.filter((task) =>
             task.id !== id))
     }
@@ -75,7 +77,7 @@ const App = () => {
                         />
                     <Route path="/ListView" render={ () =>
                         <ListView tasks={tasks}
-                                  setTasks={setTasks} /> }
+                                  onDelete={deleteTask} /> }
                        />
                 </div>
             </BrowserRouter>

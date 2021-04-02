@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {FaTrash, FaChevronDown, FaChevronUp} from 'react-icons/fa';
+import {FaTimes, FaChevronDown, FaChevronUp} from 'react-icons/fa';
 import Button from "./Button";
 
 const TaskItem = props => {
@@ -20,7 +20,7 @@ const TaskItem = props => {
                                  data-placement="bottom"
                                  title="expand"
                                  onClick={() => setExpand(!expand)} /> }
-                <FaTrash
+                <FaTimes
                     data-toggle="tooltip"
                     data-placement="bottom"
                     title="Delete task"
