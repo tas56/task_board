@@ -28,10 +28,10 @@ const App = () => {
         axios.post('http://localhost:5000/tasks', {
             title: task.title,
             description: task.description,
-            type: task.type
+            type: task.type,
+            column: 'todo'
         }).then(res => {
             let data = res.data;
-            data.column = 'todo';
             setTasks([...tasks,data])
 
         }).catch(error => {

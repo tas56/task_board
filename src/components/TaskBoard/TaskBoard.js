@@ -1,30 +1,35 @@
 import TaskItem from './TaskItem';
-import axios from "axios";
-
-const COLUMN_NAMES = ['todo', 'in-progress', 'review', 'done'];
 
 const TaskBoard = (props) => {
 
-
     const prevClick = (id) => {
-        let task = props.tasks.find((task) => task.id === id);
-        let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
-
-        columnIndex--;
-        task.column = COLUMN_NAMES[columnIndex];
-
+        let task = switchColumn(id,'prev');
         props.onUpdate(task,id)
 
     }
 
     const nextClick = (id) => {
+        let task = switchColumn(id,'next');
+        props.onUpdate(task,id)
+    }
+
+    const switchColumn = (id, click) => {
+        const COLUMN_NAMES = ['todo', 'in-progress', 'review', 'done'];
         let task = props.tasks.find((task) => task.id === id);
         let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
-
-        columnIndex++;
-        task.column = COLUMN_NAMES[columnIndex];
-
-        props.onUpdate(task,id)
+        // eslint-disable-next-line default-case
+        switch (click){
+            case 'next':
+                columnIndex++;
+                task.column = COLUMN_NAMES[columnIndex];
+                return task;
+                break;
+            case 'prev':
+                columnIndex--;
+                task.column = COLUMN_NAMES[columnIndex];
+                return task;
+                break;
+        }
     }
 
     const renderTaskItem = (task, setPrevious, setNext) => {

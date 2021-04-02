@@ -1,25 +1,11 @@
 {
   "tasks": [
     {
-      "title": "Install React",
-      "type": "task",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "in-progress",
-      "id": 1
-    },
-    {
       "title": "Setup GitHub",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "review",
+      "column": "done",
       "id": 2
-    },
-    {
-      "title": "Install Dependencies",
-      "type": "task",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "in-progress",
-      "id": 4
     },
     {
       "title": "Create App Component",
@@ -29,38 +15,25 @@
       "id": 5
     },
     {
-      "title": "Plan Component Diagram",
-      "type": "task",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done",
-      "id": 6
-    },
-    {
       "title": "Create Grid View",
       "type": "feature",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done",
+      "column": "review",
       "id": 7
     },
     {
-      "title": "Create List View",
+      "title": "Make filters work in ListView",
       "type": "feature",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "todo",
-      "id": 8
+      "description": "IS322 Task Board project",
+      "column": "in-progress",
+      "id": 11
     },
     {
-      "title": "This is a test",
-      "description": "test task",
-      "type": "feature",
-      "id": 9
-    },
-    {
-      "title": "Invite collaborators",
+      "title": "Code Refactoring",
       "type": "task",
-      "description": "to github",
+      "description": "IS322",
       "column": "todo",
-      "id": 10
+      "id": 12
     }
   ]
 }
