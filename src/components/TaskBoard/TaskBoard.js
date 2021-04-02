@@ -5,25 +5,40 @@ const COLUMN_NAMES = ['todo', 'in-progress', 'review', 'done'];
 
 const TaskBoard = (props) => {
 
-    const prevClick = async (id) => {
-       let taskColumn = await fetch(`http://localhost:5000/tasks/${id}`,
-            {method: 'GET'});
-        //let taskColumn = props.tasks.find((task) => task.id === id);
-        let columnIndex = COLUMN_NAMES.findIndex(name => taskColumn.column === name);
 
-            columnIndex--;
-            taskColumn.column = COLUMN_NAMES[columnIndex];
-            props.setTasks(taskColumn);
-
-    }
-
-    const nextClick = async (id) => {
+    const prevClick = (id) => {
         let task = props.tasks.find((task) => task.id === id);
         let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
 
-            columnIndex++;
-            task.column = COLUMN_NAMES[columnIndex];
-            props.setTasks(task);
+        columnIndex--;
+        task.column = COLUMN_NAMES[columnIndex];
+
+        updateColumn(task,id)
+
+    }
+
+    const nextClick = (id) => {
+        let task = props.tasks.find((task) => task.id === id);
+        let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
+
+        columnIndex++;
+        task.column = COLUMN_NAMES[columnIndex];
+
+        updateColumn(task,id)
+    }
+
+    const updateColumn = (task,id) => {
+        axios.put(`http://localhost:5000/tasks/${id}`, {
+            title: task.title,
+            type: task.type,
+            description: task.description,
+            column: task.column
+        }).then(resp => {
+            props.setTasks([...props.tasks]);
+            console.log(resp.data);
+        }).catch(error => {
+            console.log(error);
+        });
     }
 
     const renderTaskItem = (task, setPrevious, setNext) => {
