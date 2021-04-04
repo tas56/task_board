@@ -23,12 +23,10 @@ const TaskBoard = (props) => {
                 columnIndex++;
                 task.column = COLUMN_NAMES[columnIndex];
                 return task;
-                break;
             case 'prev':
                 columnIndex--;
                 task.column = COLUMN_NAMES[columnIndex];
                 return task;
-                break;
         }
     }
 

@@ -3,7 +3,17 @@ import {useState} from "react";
 
 const ListView = (props) => {
 
-    const renderRows =  props.tasks.map( task => {
+    const [filter, setFilter] = useState(props.tasks);
+    const [status, setStatus] = useState();
+
+    const statusFilter = () => {
+        props.tasks.filter(task => {
+            return setFilter([task.column === status]);
+        });
+    }
+
+    const renderRows = (filter) =>
+        filter.map( task => {
         return (
             <tr>
                 <th scope="row">{task.id}</th>
@@ -16,7 +26,8 @@ const ListView = (props) => {
 
     return (
         <div className="mb-5">
-            <Filters />
+            <Filters statusFilter={statusFilter}
+                     tasks={props.tasks} />
             <table className="table table-striped">
                 <thead>
                 <tr>
@@ -27,7 +38,7 @@ const ListView = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                { renderRows }
+                { renderRows(filter) }
                 </tbody>
             </table>
         </div>

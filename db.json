@@ -4,7 +4,7 @@
       "title": "Setup GitHub",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "done",
+      "column": "todo",
       "id": 2
     },
     {
@@ -15,25 +15,25 @@
       "id": 5
     },
     {
-      "title": "Create Grid View",
-      "type": "feature",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "review",
-      "id": 7
-    },
-    {
       "title": "Make filters work in ListView",
       "type": "feature",
       "description": "IS322 Task Board project",
-      "column": "in-progress",
+      "column": "done",
       "id": 11
     },
     {
       "title": "Code Refactoring",
       "type": "task",
       "description": "IS322",
-      "column": "todo",
+      "column": "done",
       "id": 12
+    },
+    {
+      "title": "mfdmdskfdahjl",
+      "type": "task",
+      "description": "jdhflaksjdhf",
+      "column": "in-progress",
+      "id": 13
     }
   ]
 }

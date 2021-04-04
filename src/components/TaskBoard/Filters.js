@@ -4,6 +4,12 @@ const Filters = (props) => {
 
     const [status, setStatus] = useState();
 
+    const statusFilter = () => {
+         props.tasks.filter(task => {
+            return setStatus(task.column === status);
+        });
+    }
+
     return(
         <div className="d-flex justify-content-around">
             <div className="form-group">
@@ -19,10 +25,9 @@ const Filters = (props) => {
             <div className="form-group">
                 <label htmlFor="status">Status</label>
                 <select className="ml-2"
-                        value={status}
                         onChange={(e) => {
                             setStatus(e.target.value)
-
+                            statusFilter()
                         }}>
                     <option value="">Select Status</option>
                     <option value="todo">To Do</option>
@@ -36,7 +41,8 @@ const Filters = (props) => {
                 <label htmlFor="type">Type</label>
                 <select className="ml-2"
                         onChange={(e) => {
-                            setStatus(e.target.value)
+                            props.setStatus(e.target.value)
+                            props.statusFilter()
                         }}>
                     <option value="">Select Type</option>
                     <option value="task">Task</option>
