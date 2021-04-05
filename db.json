@@ -4,7 +4,7 @@
       "title": "Setup GitHub",
       "type": "task",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id.",
-      "column": "todo",
+      "column": "in-progress",
       "id": 2
     },
     {
@@ -32,7 +32,7 @@
       "title": "mfdmdskfdahjl",
       "type": "task",
       "description": "jdhflaksjdhf",
-      "column": "in-progress",
+      "column": "todo",
       "id": 13
     }
   ]
